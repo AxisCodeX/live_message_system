@@ -1,0 +1,35 @@
+@import "tailwindcss";
+body {
+  background-color: #16171d;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@layer utilities {
+  .message-section-room {
+    background: red !important;
+  }
+}
+
+@layer utilities {
+  .message-section-room::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .message-section-room::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .message-section-room::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 9999px;
+  }
+
+  .message-section-room::-webkit-scrollbar-thumb:hover {
+    background-color: #6b7280;
+  }
+}
