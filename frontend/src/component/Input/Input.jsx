@@ -1,10 +1,10 @@
 import React from "react";
 
-function Input({ labelVis, label, type, onChange, className, ...props }) {
+function Input({ labelVis, label, type, onChange,labelClass, className, ...props }) {
   return (
-    <div className="flex flex-col  w-full justify-center items-center my-1.5">
+    <div className="flex flex-col  w-full justify-center items-center py-1">
       {labelVis && (
-        <label className="text-gray-300 mt-1.5" htmlFor={label}>
+        <label className={`text-gray-300 mt-1.5 mr-auto ${labelClass} `} htmlFor={label}>
           {label}
         </label>
       )}

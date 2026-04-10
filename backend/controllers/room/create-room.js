@@ -16,7 +16,7 @@ async function createRoom({roomId , admin , max},socket){
             if (room){
                 socket.emit("roomCreated")
             }else{
-                socket.emit("failedCreatingRoom","failed to create room, check your connection and try refreshing the page")
+                socket.emit("error","failed to create room, check your connection and try refreshing the page")
             }
 
         

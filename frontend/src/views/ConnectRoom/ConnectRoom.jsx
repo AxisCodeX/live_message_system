@@ -53,25 +53,17 @@ function ConnectRoom() {
     useEffect(()=>{
       if (socket.connected){
         socket.on("roomCreated",navigateToRoom)
-
-        socket.on("failedCreatingRoom",handleErr)
-
-        socket.on("roomjoiningFailed",handleErr)
-
         socket.on("roomJoined",navigateToRoom)
+
+        socket.on("error",handleErr)
       }else{
         socket.once("connect")
       }
 
       return ()=>{
         socket.off("roomCreated",navigateToRoom)
-
-        socket.off("failedCreatingRoom",handleErr)
-
-        socket.off("roomjoiningFailed",handleErr)
-
         socket.off("roomJoined",navigateToRoom)
-
+        socket.off("error",handleErr)
       }
     },[roomId,username ,maxparty])
 

@@ -1,5 +1,5 @@
 import { config } from "dotenv"
-config()
+config({quiet:true})
 import cors from "cors"
 import express from "express"
 import { Server, Socket } from "socket.io"
@@ -33,9 +33,10 @@ export const io = new Server(httpServer,{
 
 io.on("connection",(socket)=>{
     handleSocket(socket,io)
-
-    
 })
+
+
+
 
 
 
@@ -45,4 +46,3 @@ httpServer.listen(port,()=>{
 })
 
 
-//TODO : fix the ui a little more in room page and read the other on discardroom.js file for remaining task  

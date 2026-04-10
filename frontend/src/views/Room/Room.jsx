@@ -101,6 +101,14 @@ function Room() {
 
   return (
     <div className="flex flex-col  text-gray-300 min-h-screen  min-w-screen p-2.5  ">
+    {err &&(
+            <div className="flex justify-between fixed min-h-fit top-0 w-full bg-red-600 px-1.5">
+            <span className="text-[12px] text-gray-100 font-bold">{err}</span>
+            <span><X onClick={(e)=>{
+              setErr("")
+            }} color="white"/></span>
+          </div>
+          )}
       <div className="headingSection flex justify-between bg-[#16171d] sticky top-0 z-10 pt-2">
         <div className="leftSection">
           <div className="flex items-baseline">
@@ -125,7 +133,7 @@ function Room() {
         </div>
       </div>
 
-      <div className="message-section-room  flex flex-col flex-1 overflow-y-auto  py-2.5 min-h-0 ">
+      <div className="message-section-room overflow-x-hidden flex flex-col flex-1 overflow-y-auto  py-2.5 min-h-0 ">
         <div className="flex grow">
           {(messages.length !==0 )? (
             <div className="w-full">

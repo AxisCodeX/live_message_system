@@ -9,7 +9,7 @@ async function sendMessage({mes,username,roomId},socket){
     )
 
     if (!room){
-        socket.emit("roomNotFound","The room doesn't exists.")
+        socket.emit("error","The room doesn't exists.")
     }else{
         socket.to(roomId).emit("receiveMessage",{mes,username})
     }

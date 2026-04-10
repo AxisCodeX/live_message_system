@@ -8,7 +8,7 @@ async function getRoomInfo({roomId},socket){
     })
 
     if(!room){
-        socket.emit("roomNotFound","The room doesn't exists.")
+        socket.emit("error","The room doesn't exists.")
     }else{
         console.log(
             {

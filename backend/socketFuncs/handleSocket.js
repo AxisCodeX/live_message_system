@@ -2,6 +2,7 @@ import connectRoom from "../controllers/room/connect-room.js"
 import { createRoom } from "../controllers/room/create-room.js"
 import DiscardRoom from "../controllers/room/discardRoom.js";
 import getRoomInfo from "../controllers/room/getRoomInfo.js";
+import handleDisconnection from "../controllers/room/handleDisconnection.js";
 import leaveRoom from "../controllers/room/leaveRoom.js";
 import sendMessage from "../controllers/room/receiveMessage.js";
 
@@ -13,7 +14,7 @@ async function handleSocket(socket,io){
         createRoom({roomId,admin,max},socket)
     })
     socket.on("joinRoom",({roomId , username})=>{
-        connectRoom({roomId,username},socket)
+        connectRoom({roomId,username},socket,io)
     })
 
     socket.on("sendMessage",({mes,username,roomId})=>{
@@ -23,11 +24,16 @@ async function handleSocket(socket,io){
         getRoomInfo({roomId},socket)
     })
     socket.on("leaveRoom",({roomId , username})=>{
-        leaveRoom({roomId , username},socket)
+        leaveRoom({roomId , username},socket,io)
     })
+    
 
     socket.on("discardRoom",({roomId})=>{
         DiscardRoom({roomId},socket,io)
+    })
+
+    socket.on("disconnecting",()=>{
+        handleDisconnection(socket,io)
     })
 }
 
