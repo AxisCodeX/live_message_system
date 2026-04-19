@@ -1,7 +1,7 @@
 import { ApiError } from "../../Helpers/ApiError.js"
 import UserModel from "../../Models/User.js"
 
-
+import bcrypt from "bcryptjs"
 
 
 const SignIn = async (req,res)=>{
@@ -42,6 +42,8 @@ const SignIn = async (req,res)=>{
 
         
     } catch (error) {
+        console.log(error);
+        
         if (error instanceof ApiError){
             return res.status(error.status).json(
                 {
