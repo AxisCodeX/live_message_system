@@ -1,5 +1,5 @@
-const { ApiError } = require("../../../Helpers/ApiError")
-const { default: UserModel } = require("../../../Models/User")
+import { ApiError } from "../../../Helpers/ApiError.js"
+import UserModel from "../../../Models/User.js"
 
 
 const isEmailAvailable = async (email)=>{

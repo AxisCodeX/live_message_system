@@ -1,5 +1,5 @@
-import { ApiError } from "../../Helpers/ApiError"
-import UserModel from "../../Models/User"
+import { ApiError } from "../../Helpers/ApiError.js"
+import UserModel from "../../Models/User.js"
 
 
 
@@ -23,8 +23,8 @@ const SignIn = async (req,res)=>{
             throw new ApiError("user not found", 404)
         }
 
-        const ispasswordCorrct = await bcrypt.compare(password , user.password)
-        if (!ispasswordCorrct){
+        const ispasswordCorrect = await bcrypt.compare(password , user.password)
+        if (!ispasswordCorrect){
             throw new ApiError("incorrect password", 401)
         }
 
@@ -58,3 +58,6 @@ const SignIn = async (req,res)=>{
         )
     }
 }
+
+
+export default SignIn

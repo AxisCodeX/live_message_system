@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs"
 import { isUsernameAvailable } from "./functions/checkUsername.js"
 import { isEmailAvailable } from "./functions/chekEmail.js"
 import UserModel from "../../Models/User.js"
-async function SignIn (req,res){
+async function SignUp (req,res){
     try {
         const {email , username , password }= req.body
         if ([email, username ,password].some((e)=>e=="")){
@@ -62,4 +62,4 @@ async function SignIn (req,res){
     }
 }
 
-export default  SignIn
+export default  SignUp
