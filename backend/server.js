@@ -27,7 +27,10 @@ app.use(session({
 }))
 
 const httpServer = createServer(app)
-app.use(cors())
+app.use(cors({
+    origin:"http://localhost:5173",
+    credentials:true
+}))
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 

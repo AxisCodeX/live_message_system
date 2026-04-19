@@ -18,26 +18,27 @@ const userSchema = new mongoose.Schema({
     },
     privateRoomId : {
         type : String,
-        required : true,
         unique : true
     }
 },{timestamps : true})
 
+
+userSchema.pre("save",async function(){
+    try{
+        console.log(this.privateRoomId);
+        
+       if (!this.privateRoomId){
+         this.privateRoomId = randomUUID()
+       }
+    }catch(e){
+        throw e
+    }
+
+
+})
 
 const UserModel = mongoose.model("User",userSchema)
 
 export default UserModel
 
 
-userSchema.pre("save", function(next){
-    try{
-       if (!this.privateRoomId){
-         this.privateRoomId = randomUUID()
-       }
-        next()
-    }catch(e){
-        throw new Error(e.message)
-    }
-
-
-})

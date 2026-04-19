@@ -4,8 +4,8 @@ import UserModel from "../../../Models/User.js"
 
 const isEmailAvailable = async (email)=>{
     try {
-        const users = UserModel.find(
-            {email}
+        const users =await UserModel.findOne(
+            {email:email}
         )
         return users == null
     } catch (error) {

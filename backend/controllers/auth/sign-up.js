@@ -13,25 +13,25 @@ async function SignUp (req,res){
         const UsernameAvailable = await isUsernameAvailable(username)
 
         if(! isUsernameAvailable){
-            return ApiError("username already exists",409)
+            throw new  ApiError("username already exists",409)
         }
         const EmailAvailable = await isEmailAvailable(email)
+        console.log(EmailAvailable);
+        
         if (!EmailAvailable){
-            return ApiError("email already used", 409)
+            throw new  ApiError("email already used", 409)
 
         }
         const hashedPassword = await bcrypt.hash(password , 10)
 
 
-        const user = await UserModel.create({
+        const user = new UserModel({
             email ,
             username,
             password : hashedPassword
         })
 
-        if (!user){
-            throw new ApiError("failed to create a new user", 500)
-        }
+        await user.save()
 
         return res.status(200).json(
             {
@@ -43,6 +43,8 @@ async function SignUp (req,res){
 
 
     } catch (error) {
+        console.log(error);
+        
         if (error instanceof ApiError){
             return res.status(error.status).json(
                 {
