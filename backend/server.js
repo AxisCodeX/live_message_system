@@ -7,7 +7,7 @@ import {createServer} from "http"
 import session from "express-session"
 
 //local imports
-import roomRouter from "./routers/room/Router.js"
+
 import connectDB from "./db/dbConnect.js"
 import { handleSocket } from "./socketFuncs/handleSocket.js"
 import AuthRouter from "./routers/auth/router.js"
