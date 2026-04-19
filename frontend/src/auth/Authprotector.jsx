@@ -5,10 +5,12 @@ import { Navigate,  } from 'react-router-dom'
 import configs from '../configs/config'
 import { useAuth } from './AuthConstants'
 function Authprotector({children}) {
-   const {user} = useAuth()
+   const {user,loading} = useAuth()
 
-   if(user == undefined) return <p>Loading...</p>
-   if(!user) return <Navigate to="/sign-in" replace/>
+   if(loading == true) return <p>Loading...</p>
+   if (loading== false){
+    if(user===null) return <Navigate to="/sign-in" replace/>
+   }
 
    return children
 }

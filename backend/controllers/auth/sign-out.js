@@ -12,7 +12,11 @@ async function SignOut(req,res){
                 )
             }
 
-            res.clearCookie("connect.sid")
+            res.clearCookie("connect.sid",{
+                 httpOnly: true,
+                secure: true,
+                sameSite: "none"
+            })
             return res.json(
                 {
                     message : "Logout successful."
@@ -37,3 +41,5 @@ async function SignOut(req,res){
             )
     }
 }
+
+export default SignOut

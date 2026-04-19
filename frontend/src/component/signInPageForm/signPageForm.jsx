@@ -4,7 +4,9 @@ import Input from "../Input/Input"
 import axios from 'axios'
 import config from "../../configs/config"
 import { useNavigate  } from 'react-router-dom'
+import { useAuth } from '../../auth/AuthConstants'
 function SIgnUpPageForm() {
+  const { setUser } = useAuth()
     const {register , handleSubmit} = useForm()
     const navigate = useNavigate()
     const onSubmit = async (data)=>{
@@ -19,8 +21,11 @@ function SIgnUpPageForm() {
       })
       console.log(res);
 
-      if (res.status == 200){
-        navigate("/")
+      if (res.status === 200){
+         setUser(res.data.data) 
+          setTimeout(()=>{
+            navigate("/home")
+          },2000)
       }
       
     }

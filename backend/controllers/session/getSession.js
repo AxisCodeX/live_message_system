@@ -1,19 +1,24 @@
 
 
 function getSession(req,res){
-    console.log(req.session.user);
-    
+    // res.set({
+    //     'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+    //     'Pragma': 'no-cache',
+    //     'Expires': '0',
+    //     'Surrogate-Control': 'no-store'
+    // });
+     res.set('Cache-Control', 'no-store')
     if (req.session.user){
-        return res.status(200).json(
+        return res.json(
             {
                 user:req.session.user
             }
         )
 
     }
-    return res.status(401).json(
+    return res.json(
         {
-            message : "Not authenticated"
+            user : null
         }
     )
 }

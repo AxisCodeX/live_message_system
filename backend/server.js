@@ -2,7 +2,7 @@ import { config } from "dotenv"
 config({quiet:true})
 import cors from "cors"
 import express from "express"
-import { Server, Socket } from "socket.io"
+import { Server } from "socket.io"
 import {createServer} from "http"
 import session from "express-session"
 
