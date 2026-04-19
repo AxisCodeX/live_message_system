@@ -3,34 +3,14 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Navigate,  } from 'react-router-dom'
 import configs from '../configs/config'
+import { useAuth } from './AuthConstants'
 function Authprotector({children}) {
-    const [user,setUser] = useState(undefined)
-   async function fetchSession(){
-        try {
-            const res = await axios.get(`${configs.backend_uri}/me/session`,{
-                withCredentials:true
-            })
+   const {user} = useAuth()
 
-            return res.data.user
-        } catch (error) {
-            return null
-        }
-    }
+   if(user == undefined) return <p>Loading...</p>
+   if(!user) return <Navigate to="/sign-in" replace/>
 
-    useEffect(()=>{
-      (async ()=>{
-        const u = await fetchSession()
-        setUser(u)
-      })()
-    },[])
-    if(user === undefined){
-        return <p>Loading....</p>
-    }
-    if(!user){
-           return <Navigate to="/sign-in"/>
-        }
-
-  return ( children )
+   return children
 }
 
 export default Authprotector
