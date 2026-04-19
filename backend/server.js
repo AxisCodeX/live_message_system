@@ -7,8 +7,21 @@ import {createServer} from "http"
 import roomRouter from "./routers/room/Router.js"
 import connectDB from "./db/dbConnect.js"
 import { handleSocket } from "./socketFuncs/handleSocket.js"
+import session from "express-session"
 
 const app = express()
+app.use(session({
+    secret:process.env.SESSION_SECRET,
+    resave : false,
+    saveUninitialized : false,
+    
+    cookie : {
+        httpOnly  : true,
+        secure : false,
+        maxAge : 1000 * 60 * 60
+    }
+
+}))
 
 const httpServer = createServer(app)
 app.use(cors())

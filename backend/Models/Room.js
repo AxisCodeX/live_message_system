@@ -3,7 +3,8 @@ import mongoose  from "mongoose";
 const roomSchema =  new mongoose.Schema(
     {
         admin:{
-            type : String,
+            type : mongoose.Schema.Types.ObjectId,
+            ref : "User",
             required : true
         },
         roomId : {
