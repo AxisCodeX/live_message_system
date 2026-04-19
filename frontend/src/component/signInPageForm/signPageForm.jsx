@@ -1,20 +1,47 @@
-import React,{useState,useEffect} from "react";
-import { useForm } from "react-hook-form";
-import Input from "../Input/Input";
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import Input from "../Input/Input"
+import axios from 'axios'
+import config from "../../configs/config"
+import { useNavigate  } from 'react-router-dom'
+function SIgnUpPageForm() {
+    const {register , handleSubmit} = useForm()
+    const navigate = useNavigate()
+    const onSubmit = async (data)=>{
+      console.log("sending info to backend.");
+      
+      console.log (data)
+      const res = await axios.post(`${config.backend_uri}/sign-in`,{
+        email : data.email,
+        password : data.password
+      },{
+        withCredentials:true
+      })
+      console.log(res);
 
-function SignPageForm() {
+      if (res.status == 200){
+        navigate("/")
+      }
+      
+    }
   return (
-    <div className="inset-0  bg-radial from-pink-400 from-40% to-fuchsia-700 absolute flex justify-center items-center  ">
-<div className=" bg-gray-600/25 px-2.5 py-4 rounded-md  backdrop-blur-lg">
-    <form action="" >
-        <Input label={"Email"} type={"email"} labelVis = {true}/>
-        <Input label={"Password"} type={"password"} labelVis = {true} />
-        <span className="text-xs font-extralight text-white hover:text-blue-300 cursor-pointer">forgot password?</span>
-        <div className="w-full flex justify-end mt-4"><button type="submit" className="bg-blue-600/25 text-sm tracking-wider backdrop-blur-2xl  px-4 py-1 rounded-md border border-gray-600 hover:border-purple-600 hover:ring-2 hover:ring-purple-600 hover:cursor-pointer transition-all duration-300 active:bg-blue-500">Log in</button></div>
-    </form>
-</div>
-    </div>      
+    <div className='flex flex-col min-h-screen items-center justify-center'>
+        <div className='headings'></div>
+        <div className='from flex justify-center items-center'>
+          <form onSubmit={handleSubmit(onSubmit)}>
+
+            <div>
+              <Input type="email" label={"Email"} labelVis={true} placeholder="Enter your email." name="email" {...register("email",{required:true})}/>
+              <Input type={"password"} label={"Password"} labelVis={true} placeholder=" Enter a password." name="password" {...register("password",{required : true})}/>
+            </div>
+            <div className='flex justify-center'>
+              <button  className='bg-blue-600 px-2 py-2 rounded-md my-2 hover:bg-blue-700 active:bg-blue-500' type="submit">Create account</button>
+            </div>
+
+          </form>
+        </div>
+    </div>
   )
 }
 
-export default SignPageForm
+export default SIgnUpPageForm
